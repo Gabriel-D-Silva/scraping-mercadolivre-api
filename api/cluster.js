@@ -10,8 +10,8 @@ async function scrapeItensInfo(hrefs) {
     puppeteerOptions: {
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath || "/tmp/chromium",
-      ignoreHTTPSErrors: true, // Lida com HTTPS
+      executablePath: await chromium.executablePath(),
+      ignoreHTTPSErrors: true,
       userDataDir: "/tmp", // Cache no ambiente serverless
       headless: true
     }

@@ -8,11 +8,10 @@ async function scrapeLinksMC(itemBuscado) {
     // Inicializa a janela e vai pro mercado livre
     const browser = await puppeteer.launch({
         headless: true,
-        args: chromium.args,
-        defaultViewport: chromium.defaultViewport,
-        executablePath: await chromium.executablePath || "/tmp/chromium",
-        ignoreHTTPSErrors: true, // Lida com HTTPS
-        userDataDir: "/tmp", // Cache no ambiente serverless
+        args: chromium.args, // Usar os argumentos configurados pela biblioteca
+        defaultViewport: chromium.defaultViewport, // Configuração padrão
+        executablePath: await chromium.executablePath(), // Usa o caminho gerado automaticamente
+        ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
     await page.goto(url);
