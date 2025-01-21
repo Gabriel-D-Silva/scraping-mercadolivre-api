@@ -1,4 +1,4 @@
-const chromium = require('chrome-aws-lambda');
+const chromium = require('@sparticuz/chromium');
 const { Cluster } = require('puppeteer-cluster');
 
 async function scrapeItensInfo(hrefs) {
