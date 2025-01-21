@@ -1,3 +1,4 @@
+const chromium = require('chrome-aws-lambda');
 const { Cluster } = require('puppeteer-cluster');
 
 async function scrapeItensInfo(hrefs) {
@@ -6,6 +7,14 @@ async function scrapeItensInfo(hrefs) {
   const cluster = await Cluster.launch({
     concurrency: Cluster.CONCURRENCY_CONTEXT,
     maxConcurrency: 5,
+    puppeteerOptions: {
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath || "/tmp/chromium",
+      ignoreHTTPSErrors: true, // Lida com HTTPS
+      userDataDir: "/tmp", // Cache no ambiente serverless
+      headless: true
+    }
   });
 
   await cluster.task(async ({ page, data: url }) => {
